@@ -10,6 +10,14 @@ defmodule NoegenApi.UserResolver do
     find_user(id)
   end
 
+  def current(_args, %{context: %{current_user: %{id: id}}}) do
+    find_user(id)
+  end
+
+  def current(_args, _info) do
+    {:error, "Not Found"}
+  end
+
   defp find_user(id) do
     case Repo.get(User, id) do
       nil -> {:error, "Not Found"}
