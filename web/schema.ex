@@ -15,4 +15,14 @@ defmodule NoegenApi.Schema do
       resolve &NoegenApi.UserResolver.current/2
     end
   end
+
+  mutation do
+    field :user, type: :user do
+      arg :email, non_null(:string)
+      arg :username, non_null(:string)
+      arg :password, non_null(:string)
+
+      resolve &NoegenApi.UserResolver.create/2
+    end
+  end
 end
