@@ -13,14 +13,25 @@ defmodule NoegenApi.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+    plug NoegenApi.Web.AuthenticateUser
+  end
+
   scope "/", NoegenApi do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", NoegenApi do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :graphql
+
+    forward "/", Absinthe.Plug,
+      schema: NoegenApi.Schema
+  end
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: NoegenApi.Schema
 end
