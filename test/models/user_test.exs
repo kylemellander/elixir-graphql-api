@@ -30,4 +30,9 @@ defmodule NoegenApi.UserTest do
     changeset = User.registration_changeset(%User{}, @valid_changeset_attrs)
     refute changeset.valid?
   end
+
+  test "registration_changeset adds password_hash" do
+    changeset = User.registration_changeset(%User{}, @valid_registration_attrs)
+    assert get_field(changeset, :password_hash)
+  end
 end
