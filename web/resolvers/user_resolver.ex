@@ -18,6 +18,12 @@ defmodule NoegenApi.UserResolver do
     {:error, "Not Found"}
   end
 
+  def create(args, _info) do
+    %User{}
+      |> User.registration_changeset(args)
+      |> Repo.insert
+  end
+
   defp find_user(id) do
     case Repo.get(User, id) do
       nil -> {:error, "Not Found"}
