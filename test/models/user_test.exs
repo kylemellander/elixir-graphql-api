@@ -20,4 +20,14 @@ defmodule NoegenApi.UserTest do
     changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  test "registration_changeset with valid attributes" do
+    changeset = User.registration_changeset(%User{}, @valid_registration_attrs)
+    assert changeset.valid?
+  end
+
+  test "registration_changeset with invalid attributes" do
+    changeset = User.registration_changeset(%User{}, @valid_changeset_attrs)
+    refute changeset.valid?
+  end
 end
