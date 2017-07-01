@@ -3,11 +3,16 @@ defmodule NoegenApi.UserTest do
 
   alias NoegenApi.User
 
-  @valid_attrs %{email: "some email", username: "some name"}
+  @valid_changeset_attrs %{email: "some email", username: "some name"}
+  @valid_registration_attrs %{
+    email: "some email",
+    username: "some name",
+    password: "somepassword"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = User.changeset(%User{}, @valid_attrs)
+    changeset = User.changeset(%User{}, @valid_changeset_attrs)
     assert changeset.valid?
   end
 
