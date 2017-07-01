@@ -31,6 +31,7 @@ defmodule NoegenApi.User do
     struct
     |> changeset(params)
     |> cast(params, [:password])
+    |> validate_required(:password)
     |> validate_length(:password, min: 6, max: 100)
     |> add_password_hash()
   end
