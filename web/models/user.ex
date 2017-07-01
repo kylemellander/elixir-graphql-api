@@ -17,9 +17,8 @@ defmodule NoegenApi.User do
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
-    @spec changeset(struct, params :: map \\ %{}) :: changeset
-
+  @spec changeset(struct, params :: map) :: struct
+  def changeset(struct, params) do
     struct
     |> cast(params, [:username, :email, :first_name, :last_name])
     |> validate_required([:username, :email])
@@ -27,9 +26,8 @@ defmodule NoegenApi.User do
     |> unique_constraint(:email)
   end
 
+  @spec registration_changeset(struct, params :: map) :: struct
   def registration_changeset(struct, params) do
-    @spec registration_changeset(struct, params :: map) :: changeset
-
     struct
     |> changeset(params)
     |> cast(params, [:password])
