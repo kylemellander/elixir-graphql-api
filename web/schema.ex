@@ -10,5 +10,9 @@ defmodule NoegenApi.Schema do
     field :users, list_of(:user) do
       resolve &NoegenApi.UserResolver.all/2
     end
+
+    field :current_user, type: :user do
+      resolve &NoegenApi.UserResolver.current/2
+    end
   end
 end
