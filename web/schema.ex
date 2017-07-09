@@ -8,12 +8,12 @@ defmodule NoegenApi.Schema do
       resolve &NoegenApi.PostResolver.all/2
     end
 
-    field :users, list_of(:user) do
-      resolve &NoegenApi.UserResolver.all/2
-    end
+    # field :users, list_of(:user) do
+    #   resolve &UserResolver.all/2
+    # end
 
     field :current_user, type: :user do
-      resolve &NoegenApi.UserResolver.current/2
+      resolve &UserResolver.current/2
     end
   end
 
