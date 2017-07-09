@@ -1,6 +1,7 @@
 defmodule NoegenApi.Schema do
   use Absinthe.Schema
   import_types NoegenApi.Schema.Types
+  alias NoegenApi.UserResolver
 
   query do
     field :posts, list_of(:post) do
@@ -17,12 +18,19 @@ defmodule NoegenApi.Schema do
   end
 
   mutation do
-    field :user, type: :user do
+    field :create_user, type: :user do
       arg :email, non_null(:string)
       arg :username, non_null(:string)
       arg :password, non_null(:string)
 
-      resolve &NoegenApi.UserResolver.create/2
+      resolve &UserResolver.create/2
+    end
+
+    field :login, type: :session do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+
+      resolve &UserResolver.login/2
     end
   end
 end
