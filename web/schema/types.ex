@@ -11,6 +11,10 @@ defmodule NoegenApi.Schema.Types do
     field :posts, list_of(:post), resolve: assoc(:posts)
   end
 
+  object :session do
+    field :token, :string
+  end
+
   object :post do
     field :id, :id
     field :title, :string
