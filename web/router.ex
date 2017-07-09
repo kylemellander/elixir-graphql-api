@@ -18,6 +18,10 @@ defmodule NoegenApi.Router do
       schema: NoegenApi.Schema
   end
 
-  forward "/graphiql", Absinthe.Plug.GraphiQL,
-    schema: NoegenApi.Schema
+  # scope "/graphiql" do
+  #   pipe_through :graphql
+  #
+  #   forward "/", Absinthe.Plug.GraphiQL,
+  #     schema: NoegenApi.Schema
+  # end
 end
