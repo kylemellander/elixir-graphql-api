@@ -2,8 +2,12 @@ defmodule NoegenApi.UserResolver do
   alias NoegenApi.Repo
   alias NoegenApi.User
 
-  def all(_args, _info) do
+  def all(_args, %{context: %{current_user: _}}) do
     {:ok, Repo.all(User)}
+  end
+
+  def all(_args, _info) do
+    {:error, "Unauthorized"}
   end
 
   def find(%{id: id}, _info) do
