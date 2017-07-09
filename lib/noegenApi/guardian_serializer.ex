@@ -1,4 +1,4 @@
-defmodule Noegen.GuardianSerializer do
+defmodule NoegenApi.GuardianSerializer do
   @behaviour Guardian.Serializer
 
   alias NoegenApi.Repo
